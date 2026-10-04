@@ -1,0 +1,131 @@
+Case_ID,Patient_Type,Department,TPA_or_Payer,Service_Type,Claim_Amount,Approved_Amount,Rejected_Amount,Pending_Amount,Submission_Date,Settlement_Date,Case_Status,Query_or_Rejection_Reason
+C001,Inpatient,Cardiology,MediAssist,Surgery,150000,140000,0,10000,2024-01-03,2024-01-18,Approved,
+C002,Outpatient,Orthopedics,Vidal Health,Consultation,8000,0,8000,0,2024-01-05,2024-01-20,Rejected,Policy exclusion
+C003,Inpatient,Neurology,Star Health,Surgery,200000,185000,0,15000,2024-01-07,2024-01-28,Approved,
+C004,Inpatient,Cardiology,MediAssist,ICU,95000,0,0,95000,2024-01-10,,Pending,Document missing
+C005,Outpatient,Oncology,Vidal Health,Chemotherapy,60000,55000,0,5000,2024-01-12,2024-01-27,Approved,
+C006,Inpatient,Orthopedics,Paramount Health,Surgery,120000,110000,0,10000,2024-01-15,2024-02-05,Approved,
+C007,Daycare,Ophthalmology,MediAssist,Procedure,25000,20000,5000,0,2024-01-17,2024-02-01,Partially Approved,Partial coverage
+C008,Inpatient,Neurology,Star Health,ICU,180000,0,180000,0,2024-01-20,2024-02-08,Rejected,Pre-existing condition
+C009,Outpatient,Gynecology,Vidal Health,Consultation,5000,5000,0,0,2024-01-22,2024-01-30,Approved,
+C010,Inpatient,Cardiology,Paramount Health,Surgery,175000,160000,0,15000,2024-01-25,2024-02-12,Approved,
+C011,Inpatient,Oncology,MediAssist,Radiation,80000,0,0,80000,2024-01-28,,Pending,Query raised
+C012,Outpatient,Orthopedics,Star Health,Physiotherapy,12000,10000,0,2000,2024-02-01,2024-02-15,Approved,
+C013,Inpatient,Cardiology,Vidal Health,Surgery,220000,200000,0,20000,2024-02-03,2024-02-25,Approved,
+C014,Daycare,Ophthalmology,MediAssist,Cataract,30000,28000,0,2000,2024-02-06,2024-02-20,Approved,
+C015,Inpatient,Neurology,Paramount Health,Surgery,160000,0,160000,0,2024-02-08,2024-02-28,Rejected,Not covered
+C016,Outpatient,Gynecology,Star Health,Consultation,6000,6000,0,0,2024-02-10,2024-02-18,Approved,
+C017,Inpatient,Oncology,Vidal Health,Surgery,250000,230000,0,20000,2024-02-13,2024-03-05,Approved,
+C018,Inpatient,Cardiology,MediAssist,ICU,140000,0,0,140000,2024-02-15,,Pending,Pending verification
+C019,Outpatient,Orthopedics,Star Health,Consultation,9000,9000,0,0,2024-02-18,2024-02-26,Approved,
+C020,Inpatient,Neurology,Vidal Health,ICU,195000,180000,0,15000,2024-02-20,2024-03-12,Approved,
+C021,Inpatient,Cardiology,Paramount Health,Surgery,165000,150000,0,15000,2024-02-23,2024-03-15,Approved,
+C022,Outpatient,Gynecology,MediAssist,Procedure,18000,0,18000,0,2024-02-25,2024-03-10,Rejected,Policy exclusion
+C023,Inpatient,Oncology,Star Health,Chemotherapy,90000,82000,0,8000,2024-02-28,2024-03-20,Approved,
+C024,Daycare,Ophthalmology,Vidal Health,Procedure,22000,20000,2000,0,2024-03-02,2024-03-16,Partially Approved,Partial coverage
+C025,Inpatient,Cardiology,MediAssist,Surgery,185000,170000,0,15000,2024-03-05,2024-03-25,Approved,
+C026,Outpatient,Orthopedics,Paramount Health,Consultation,7500,0,0,7500,2024-03-07,,Pending,Document missing
+C027,Inpatient,Neurology,Star Health,Surgery,210000,195000,0,15000,2024-03-10,2024-04-01,Approved,
+C028,Inpatient,Gynecology,Vidal Health,Surgery,130000,120000,0,10000,2024-03-12,2024-04-02,Approved,
+C029,Outpatient,Oncology,MediAssist,Consultation,11000,0,11000,0,2024-03-15,2024-03-28,Rejected,Not covered
+C030,Inpatient,Cardiology,Paramount Health,ICU,155000,0,0,155000,2024-03-18,,Pending,Query raised
+C031,Inpatient,Orthopedics,Star Health,Surgery,145000,130000,0,15000,2024-03-20,2024-04-10,Approved,
+C032,Outpatient,Neurology,Vidal Health,Consultation,8500,8500,0,0,2024-03-22,2024-03-30,Approved,
+C033,Inpatient,Cardiology,MediAssist,Surgery,230000,210000,0,20000,2024-03-25,2024-04-14,Approved,
+C034,Daycare,Ophthalmology,Star Health,Cataract,32000,30000,2000,0,2024-03-28,2024-04-12,Partially Approved,Partial coverage
+C035,Inpatient,Oncology,Paramount Health,Radiation,95000,88000,0,7000,2024-04-01,2024-04-22,Approved,
+C036,Outpatient,Gynecology,Vidal Health,Consultation,5500,5500,0,0,2024-04-03,2024-04-11,Approved,
+C037,Inpatient,Cardiology,MediAssist,ICU,160000,0,0,160000,2024-04-06,,Pending,Pending verification
+C038,Outpatient,Orthopedics,Star Health,Physiotherapy,13000,0,13000,0,2024-04-08,2024-04-22,Rejected,Policy exclusion
+C039,Inpatient,Neurology,Paramount Health,Surgery,215000,198000,0,17000,2024-04-10,2024-05-01,Approved,
+C040,Inpatient,Oncology,Vidal Health,Surgery,270000,250000,0,20000,2024-04-13,2024-05-04,Approved,
+C041,Outpatient,Cardiology,MediAssist,Consultation,7000,7000,0,0,2024-04-15,2024-04-23,Approved,
+C042,Inpatient,Gynecology,Star Health,Surgery,135000,125000,0,10000,2024-04-17,2024-05-07,Approved,
+C043,Inpatient,Orthopedics,Paramount Health,Surgery,150000,0,0,150000,2024-04-20,,Pending,Document missing
+C044,Daycare,Ophthalmology,Vidal Health,Procedure,27000,25000,2000,0,2024-04-22,2024-05-06,Partially Approved,Partial coverage
+C045,Inpatient,Cardiology,MediAssist,Surgery,190000,175000,0,15000,2024-04-25,2024-05-16,Approved,
+C046,Outpatient,Neurology,Star Health,Consultation,9500,0,9500,0,2024-04-27,2024-05-10,Rejected,Pre-existing condition
+C047,Inpatient,Oncology,Vidal Health,Chemotherapy,85000,78000,0,7000,2024-05-01,2024-05-22,Approved,
+C048,Inpatient,Cardiology,Paramount Health,ICU,170000,155000,0,15000,2024-05-04,2024-05-28,Approved,
+C049,Outpatient,Gynecology,MediAssist,Consultation,6500,6500,0,0,2024-05-06,2024-05-14,Approved,
+C050,Inpatient,Orthopedics,Star Health,Surgery,155000,140000,0,15000,2024-05-08,2024-05-30,Approved,
+C051,Inpatient,Neurology,Vidal Health,Surgery,225000,205000,0,20000,2024-05-11,2024-06-01,Approved,
+C052,Outpatient,Cardiology,MediAssist,Consultation,8000,0,0,8000,2024-05-13,,Pending,Query raised
+C053,Inpatient,Oncology,Paramount Health,Surgery,280000,260000,0,20000,2024-05-15,2024-06-06,Approved,
+C054,Daycare,Ophthalmology,Star Health,Cataract,35000,32000,3000,0,2024-05-18,2024-06-01,Partially Approved,Partial coverage
+C055,Inpatient,Gynecology,Vidal Health,Surgery,140000,0,140000,0,2024-05-20,2024-06-09,Rejected,Not covered
+C056,Outpatient,Orthopedics,MediAssist,Physiotherapy,14000,12000,0,2000,2024-05-22,2024-06-05,Approved,
+C057,Inpatient,Cardiology,Paramount Health,Surgery,200000,185000,0,15000,2024-05-25,2024-06-16,Approved,
+C058,Outpatient,Neurology,Star Health,Consultation,10000,10000,0,0,2024-05-27,2024-06-04,Approved,
+C059,Inpatient,Oncology,Vidal Health,Radiation,100000,92000,0,8000,2024-05-30,2024-06-22,Approved,
+C060,Inpatient,Cardiology,MediAssist,ICU,175000,0,0,175000,2024-06-02,,Pending,Pending verification
+C061,Inpatient,Orthopedics,Paramount Health,Surgery,160000,145000,0,15000,2024-06-05,2024-06-28,Approved,
+C062,Outpatient,Gynecology,Star Health,Consultation,7000,7000,0,0,2024-06-07,2024-06-15,Approved,
+C063,Inpatient,Neurology,Vidal Health,ICU,205000,190000,0,15000,2024-06-10,2024-07-02,Approved,
+C064,Daycare,Ophthalmology,MediAssist,Procedure,28000,0,28000,0,2024-06-12,2024-06-28,Rejected,Policy exclusion
+C065,Inpatient,Oncology,Star Health,Surgery,290000,270000,0,20000,2024-06-15,2024-07-07,Approved,
+C066,Outpatient,Cardiology,Paramount Health,Consultation,8500,0,0,8500,2024-06-17,,Pending,Document missing
+C067,Inpatient,Gynecology,Vidal Health,Surgery,145000,132000,0,13000,2024-06-20,2024-07-12,Approved,
+C068,Outpatient,Orthopedics,MediAssist,Consultation,9000,9000,0,0,2024-06-22,2024-06-30,Approved,
+C069,Inpatient,Cardiology,Star Health,Surgery,210000,192000,0,18000,2024-06-25,2024-07-17,Approved,
+C070,Inpatient,Neurology,Paramount Health,Surgery,230000,0,230000,0,2024-06-27,2024-07-19,Rejected,Pre-existing condition
+C071,Outpatient,Oncology,Vidal Health,Consultation,12000,12000,0,0,2024-07-01,2024-07-09,Approved,
+C072,Inpatient,Cardiology,MediAssist,ICU,185000,170000,0,15000,2024-07-04,2024-07-26,Approved,
+C073,Inpatient,Orthopedics,Star Health,Surgery,165000,0,0,165000,2024-07-07,,Pending,Query raised
+C074,Daycare,Ophthalmology,Paramount Health,Cataract,33000,30000,3000,0,2024-07-10,2024-07-24,Partially Approved,Partial coverage
+C075,Inpatient,Gynecology,Vidal Health,Surgery,150000,138000,0,12000,2024-07-13,2024-08-03,Approved,
+C076,Outpatient,Neurology,MediAssist,Consultation,10500,0,10500,0,2024-07-15,2024-07-28,Rejected,Not covered
+C077,Inpatient,Oncology,Star Health,Chemotherapy,110000,100000,0,10000,2024-07-18,2024-08-09,Approved,
+C078,Inpatient,Cardiology,Paramount Health,Surgery,215000,198000,0,17000,2024-07-21,2024-08-12,Approved,
+C079,Outpatient,Gynecology,Vidal Health,Consultation,7500,7500,0,0,2024-07-23,2024-07-31,Approved,
+C080,Inpatient,Orthopedics,MediAssist,Surgery,170000,155000,0,15000,2024-07-26,2024-08-17,Approved,
+C081,Inpatient,Neurology,Star Health,ICU,240000,220000,0,20000,2024-07-29,2024-08-20,Approved,
+C082,Outpatient,Cardiology,Paramount Health,Consultation,9000,0,0,9000,2024-08-01,,Pending,Pending verification
+C083,Inpatient,Oncology,Vidal Health,Surgery,300000,278000,0,22000,2024-08-04,2024-08-28,Approved,
+C084,Daycare,Ophthalmology,MediAssist,Procedure,30000,27000,3000,0,2024-08-07,2024-08-21,Partially Approved,Partial coverage
+C085,Inpatient,Gynecology,Star Health,Surgery,155000,0,155000,0,2024-08-09,2024-08-30,Rejected,Policy exclusion
+C086,Outpatient,Orthopedics,Paramount Health,Physiotherapy,15000,13000,0,2000,2024-08-12,2024-08-26,Approved,
+C087,Inpatient,Cardiology,Vidal Health,ICU,195000,178000,0,17000,2024-08-15,2024-09-06,Approved,
+C088,Outpatient,Neurology,MediAssist,Consultation,11000,11000,0,0,2024-08-17,2024-08-25,Approved,
+C089,Inpatient,Oncology,Star Health,Radiation,115000,106000,0,9000,2024-08-20,2024-09-12,Approved,
+C090,Inpatient,Cardiology,Paramount Health,Surgery,225000,0,0,225000,2024-08-23,,Pending,Document missing
+C091,Inpatient,Orthopedics,Vidal Health,Surgery,175000,160000,0,15000,2024-08-26,2024-09-17,Approved,
+C092,Outpatient,Gynecology,MediAssist,Consultation,8000,8000,0,0,2024-08-28,2024-09-05,Approved,
+C093,Inpatient,Neurology,Star Health,Surgery,245000,225000,0,20000,2024-09-01,2024-09-23,Approved,
+C094,Daycare,Ophthalmology,Paramount Health,Cataract,36000,33000,3000,0,2024-09-04,2024-09-18,Partially Approved,Partial coverage
+C095,Inpatient,Cardiology,Vidal Health,ICU,200000,185000,0,15000,2024-09-07,2024-09-30,Approved,
+C096,Outpatient,Oncology,MediAssist,Consultation,13000,0,13000,0,2024-09-09,2024-09-22,Rejected,Pre-existing condition
+C097,Inpatient,Gynecology,Star Health,Surgery,160000,148000,0,12000,2024-09-12,2024-10-04,Approved,
+C098,Outpatient,Orthopedics,Paramount Health,Consultation,10000,0,0,10000,2024-09-15,,Pending,Query raised
+C099,Inpatient,Neurology,Vidal Health,Surgery,255000,235000,0,20000,2024-09-18,2024-10-10,Approved,
+C100,Inpatient,Cardiology,MediAssist,Surgery,235000,215000,0,20000,2024-09-21,2024-10-13,Approved,
+C101,Outpatient,Oncology,Star Health,Chemotherapy,45000,40000,0,5000,2024-09-24,2024-10-08,Approved,
+C102,Inpatient,Gynecology,Paramount Health,ICU,165000,0,0,165000,2024-09-27,,Pending,Pending verification
+C103,Inpatient,Cardiology,Vidal Health,Surgery,240000,220000,0,20000,2024-10-01,2024-10-24,Approved,
+C104,Daycare,Ophthalmology,MediAssist,Procedure,31000,28000,3000,0,2024-10-04,2024-10-18,Partially Approved,Partial coverage
+C105,Inpatient,Orthopedics,Star Health,Surgery,180000,0,180000,0,2024-10-07,2024-10-29,Rejected,Not covered
+C106,Outpatient,Neurology,Paramount Health,Consultation,12000,12000,0,0,2024-10-10,2024-10-18,Approved,
+C107,Inpatient,Oncology,Vidal Health,Surgery,310000,288000,0,22000,2024-10-13,2024-11-05,Approved,
+C108,Inpatient,Cardiology,MediAssist,ICU,205000,188000,0,17000,2024-10-16,2024-11-07,Approved,
+C109,Outpatient,Gynecology,Star Health,Consultation,9000,9000,0,0,2024-10-19,2024-10-27,Approved,
+C110,Inpatient,Orthopedics,Paramount Health,Surgery,185000,0,0,185000,2024-10-22,,Pending,Document missing
+C111,Inpatient,Neurology,Vidal Health,ICU,260000,240000,0,20000,2024-10-25,2024-11-17,Approved,
+C112,Outpatient,Cardiology,MediAssist,Consultation,10000,0,10000,0,2024-10-28,2024-11-10,Rejected,Policy exclusion
+C113,Inpatient,Oncology,Star Health,Radiation,120000,110000,0,10000,2024-11-01,2024-11-23,Approved,
+C114,Daycare,Ophthalmology,Paramount Health,Cataract,38000,35000,3000,0,2024-11-04,2024-11-18,Partially Approved,Partial coverage
+C115,Inpatient,Gynecology,Vidal Health,Surgery,168000,155000,0,13000,2024-11-07,2024-11-29,Approved,
+C116,Outpatient,Orthopedics,MediAssist,Physiotherapy,16000,14000,0,2000,2024-11-10,2024-11-24,Approved,
+C117,Inpatient,Cardiology,Star Health,Surgery,245000,225000,0,20000,2024-11-13,2024-12-05,Approved,
+C118,Outpatient,Neurology,Paramount Health,Consultation,13000,0,0,13000,2024-11-16,,Pending,Query raised
+C119,Inpatient,Oncology,Vidal Health,Surgery,320000,298000,0,22000,2024-11-19,2024-12-12,Approved,
+C120,Inpatient,Cardiology,MediAssist,ICU,215000,198000,0,17000,2024-11-22,2024-12-14,Approved,
+C121,Outpatient,Gynecology,Star Health,Consultation,9500,9500,0,0,2024-11-25,2024-12-03,Approved,
+C122,Inpatient,Orthopedics,Paramount Health,Surgery,190000,175000,0,15000,2024-11-28,2024-12-20,Approved,
+C123,Inpatient,Neurology,Vidal Health,Surgery,265000,0,265000,0,2024-12-01,2024-12-23,Rejected,Pre-existing condition
+C124,Outpatient,Oncology,MediAssist,Consultation,14000,14000,0,0,2024-12-04,2024-12-12,Approved,
+C125,Inpatient,Cardiology,Star Health,Surgery,250000,230000,0,20000,2024-12-07,2024-12-30,Approved,
+C126,Daycare,Ophthalmology,Paramount Health,Procedure,29000,26000,3000,0,2024-12-10,2024-12-24,Partially Approved,Partial coverage
+C127,Inpatient,Gynecology,Vidal Health,ICU,172000,0,0,172000,2024-12-13,,Pending,Pending verification
+C128,Outpatient,Orthopedics,MediAssist,Consultation,11000,11000,0,0,2024-12-16,2024-12-24,Approved,
+C129,Inpatient,Neurology,Star Health,Surgery,270000,250000,0,20000,2024-12-19,2025-01-10,Approved,
+C130,Inpatient,Oncology,Paramount Health,Chemotherapy,125000,115000,0,10000,2024-12-22,2025-01-14,Approved,
