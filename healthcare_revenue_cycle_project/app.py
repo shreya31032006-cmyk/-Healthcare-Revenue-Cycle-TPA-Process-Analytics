@@ -3,8 +3,7 @@ Healthcare Revenue Cycle and TPA Process Analytics Dashboard
 =============================================================
 A Python-only Streamlit dashboard for monitoring revenue-cycle activities,
 claim status, TPA performance, and process analytics.
-
-No HTML, CSS, JavaScript, machine-learning, or external AI APIs are used.
+Includes a Random Forest-based claim rejection predictor.
 """
 
 import os
@@ -14,6 +13,10 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 from datetime import date, timedelta
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, confusion_matrix
 
 # ---------------------------------------------------------------------------
 # Constants & Project Assumptions
@@ -610,6 +613,178 @@ def render_query_rejection_analysis(df: pd.DataFrame) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Prediction model
+# ---------------------------------------------------------------------------
+
+@st.cache_resource(show_spinner="Training prediction model…")
+def train_rejection_model(df: pd.DataFrame):
+    """
+    Train a Random Forest classifier to predict whether a claim will be
+    Rejected (1) or Not Rejected (0).
+    Features: Department, TPA_or_Payer, Patient_Type, Service_Type, Claim_Amount
+    Returns: (model, label_encoders, feature_names, report_dict, cm, classes)
+    """
+    model_df = df.copy()
+
+    # Binary target: Rejected = 1, everything else = 0
+    model_df["Target"] = (model_df["Case_Status"] == "Rejected").astype(int)
+
+    cat_cols = ["Department", "TPA_or_Payer", "Patient_Type", "Service_Type"]
+    encoders = {}
+    for col in cat_cols:
+        le = LabelEncoder()
+        model_df[col + "_enc"] = le.fit_transform(model_df[col].astype(str))
+        encoders[col] = le
+
+    feature_cols = [c + "_enc" for c in cat_cols] + ["Claim_Amount"]
+    X = model_df[feature_cols]
+    y = model_df["Target"]
+
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.25, random_state=42, stratify=y if y.sum() > 1 else None
+    )
+
+    clf = RandomForestClassifier(n_estimators=100, random_state=42, class_weight="balanced")
+    clf.fit(X_train, y_train)
+
+    y_pred = clf.predict(X_test)
+    report = classification_report(y_test, y_pred, output_dict=True, zero_division=0)
+    cm = confusion_matrix(y_test, y_pred)
+
+    return clf, encoders, cat_cols, feature_cols, report, cm
+
+
+def render_prediction(df: pd.DataFrame) -> None:
+    st.header("🤖 Claim Rejection Predictor")
+    st.caption(
+        "Uses a Random Forest model trained on historical claims to predict whether "
+        "a new claim is likely to be **Rejected** or **Not Rejected**."
+    )
+
+    # Train model
+    clf, encoders, cat_cols, feature_cols, report, cm = train_rejection_model(df)
+
+    # ── Model performance ──────────────────────────────────────────────────
+    with st.expander("📈 Model Performance (on test split)", expanded=False):
+        col1, col2, col3 = st.columns(3)
+        col1.metric("Precision (Rejected)", f"{report.get('1', {}).get('precision', 0):.0%}")
+        col2.metric("Recall (Rejected)",    f"{report.get('1', {}).get('recall', 0):.0%}")
+        col3.metric("Accuracy",             f"{report.get('accuracy', 0):.0%}")
+
+        st.markdown("**Confusion Matrix**")
+        cm_df = pd.DataFrame(
+            cm,
+            index=["Actual: Not Rejected", "Actual: Rejected"],
+            columns=["Predicted: Not Rejected", "Predicted: Rejected"],
+        )
+        st.dataframe(cm_df, use_container_width=True)
+
+        # Feature importance
+        importances = pd.DataFrame({
+            "Feature": [c.replace("_enc", "") for c in feature_cols],
+            "Importance": clf.feature_importances_,
+        }).sort_values("Importance", ascending=True)
+
+        fig_imp = px.bar(
+            importances,
+            x="Importance",
+            y="Feature",
+            orientation="h",
+            title="Feature Importance",
+            color="Importance",
+            color_continuous_scale="Blues",
+        )
+        st.plotly_chart(fig_imp, use_container_width=True)
+
+    st.markdown("---")
+    st.subheader("🔍 Predict a New Claim")
+
+    # ── Input form ─────────────────────────────────────────────────────────
+    col1, col2 = st.columns(2)
+
+    dept_options     = sorted(df["Department"].dropna().unique().tolist())
+    tpa_options      = sorted(df["TPA_or_Payer"].dropna().unique().tolist())
+    pt_options       = sorted(df["Patient_Type"].dropna().unique().tolist())
+    service_options  = sorted(df["Service_Type"].dropna().unique().tolist())
+
+    with col1:
+        inp_dept    = st.selectbox("Department",      dept_options)
+        inp_tpa     = st.selectbox("TPA / Payer",     tpa_options)
+
+    with col2:
+        inp_pt      = st.selectbox("Patient Type",    pt_options)
+        inp_service = st.selectbox("Service Type",    service_options)
+
+    inp_amount = st.number_input(
+        "Claim Amount (₹)", min_value=1000, max_value=10_000_000,
+        value=50000, step=5000
+    )
+
+    if st.button("Predict", type="primary"):
+        row = {
+            "Department":   inp_dept,
+            "TPA_or_Payer": inp_tpa,
+            "Patient_Type": inp_pt,
+            "Service_Type": inp_service,
+            "Claim_Amount": inp_amount,
+        }
+
+        # Encode inputs
+        encoded = []
+        for col in cat_cols:
+            le = encoders[col]
+            val = row[col]
+            if val in le.classes_:
+                encoded.append(le.transform([val])[0])
+            else:
+                encoded.append(0)
+        encoded.append(inp_amount)
+
+        input_array = np.array(encoded).reshape(1, -1)
+        prediction  = clf.predict(input_array)[0]
+        probability = clf.predict_proba(input_array)[0]
+
+        rejected_prob     = probability[1] if len(probability) > 1 else probability[0]
+        not_rejected_prob = 1 - rejected_prob
+
+        st.markdown("---")
+        if prediction == 1:
+            st.error(f"⚠️ **Prediction: HIGH REJECTION RISK** — {rejected_prob:.0%} probability of rejection")
+        else:
+            st.success(f"✅ **Prediction: LIKELY TO BE APPROVED** — {not_rejected_prob:.0%} probability of approval")
+
+        # Probability bar
+        prob_df = pd.DataFrame({
+            "Outcome":      ["Not Rejected", "Rejected"],
+            "Probability":  [not_rejected_prob, rejected_prob],
+        })
+        fig_prob = px.bar(
+            prob_df,
+            x="Outcome",
+            y="Probability",
+            color="Outcome",
+            color_discrete_map={"Not Rejected": "#22c55e", "Rejected": "#ef4444"},
+            title="Prediction Probability",
+            text_auto=".0%",
+        )
+        fig_prob.update_layout(yaxis_tickformat=".0%", showlegend=False)
+        st.plotly_chart(fig_prob, use_container_width=True)
+
+        # Similar historical claims
+        st.subheader("📋 Similar Historical Claims")
+        similar = df[
+            (df["Department"]   == inp_dept) &
+            (df["TPA_or_Payer"] == inp_tpa)  &
+            (df["Patient_Type"] == inp_pt)
+        ][["Case_ID", "Service_Type", "Claim_Amount", "Case_Status", "Query_or_Rejection_Reason", "Processing_Days"]]
+        if similar.empty:
+            st.info("No historical claims found with the same Department + TPA + Patient Type combination.")
+        else:
+            st.caption(f"{len(similar)} similar claim(s) found.")
+            st.dataframe(similar, use_container_width=True, hide_index=True)
+
+
+# ---------------------------------------------------------------------------
 # Main application
 # ---------------------------------------------------------------------------
 
@@ -651,6 +826,7 @@ def main() -> None:
         "Department Analysis",
         "Process Performance",
         "Query and Rejection Analysis",
+        "Claim Rejection Predictor",
     ]
     section = st.selectbox("Navigate to section", sections, index=0, label_visibility="collapsed")
 
@@ -668,6 +844,8 @@ def main() -> None:
         render_process_performance(filtered_df)
     elif section == "Query and Rejection Analysis":
         render_query_rejection_analysis(filtered_df)
+    elif section == "Claim Rejection Predictor":
+        render_prediction(raw_df)
 
 
 if __name__ == "__main__":
